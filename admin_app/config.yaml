@@ -1,0 +1,248 @@
+# DASAS Admin Application Configuration
+# =========================================
+# Production configuration file for the Distributed Android Screen Analytics System
+# Admin Dashboard. Modify these settings based on your deployment environment.
+
+# Application Settings
+app:
+  name: "DASAS Admin Dashboard"
+  version: "1.0.0"
+  debug: false
+  host: "0.0.0.0"
+  port: 8501
+  secret_key: "your-secret-key-change-in-production"
+  allowed_hosts:
+    - "*"
+
+# Database Configuration
+database:
+  # SQLite for development, PostgreSQL recommended for production
+  type: "sqlite"
+  path: "./data/dasas_admin.db"
+  pool_size: 10
+  max_overflow: 20
+  
+  # PostgreSQL configuration (uncomment for production)
+  # type: "postgresql"
+  # host: "localhost"
+  # port: 5432
+  # name: "dasas_admin"
+  # user: "admin"
+  # password: "secure-password"
+  # pool_size: 20
+  # max_overflow: 40
+
+# Redis Configuration (for caching and sessions)
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: null
+  key_prefix: "dasas:"
+  cache_ttl: 300  # seconds
+
+# MQTT Configuration (for device communication)
+mqtt:
+  broker: "localhost"
+  port: 1883
+  username: null
+  password: null
+  client_id: "dasas_admin"
+  topic_prefix: "dasas/devices"
+  qos: 1
+  keepalive: 60
+
+# gRPC Configuration (for Android device communication)
+grpc:
+  host: "0.0.0.0"
+  port: 50051
+  max_workers: 10
+  max_message_length: 104857600  # 100MB
+
+# REST API Configuration
+api:
+  host: "0.0.0.0"
+  port: 8000
+  debug: false
+  title: "DASAS Admin API"
+  description: "REST API for managing DASAS infrastructure"
+  version: "1.0.0"
+  docs_url: "/docs"
+  redoc_url: "/redoc"
+
+# Authentication Settings
+auth:
+  enabled: true
+  jwt_secret: "your-jwt-secret-key-change-in-production"
+  jwt_algorithm: "HS256"
+  token_expire_minutes: 60
+  refresh_token_expire_days: 7
+  
+  # OAuth configuration (optional)
+  oauth:
+    enabled: false
+    google:
+      client_id: ""
+      client_secret: ""
+    github:
+      client_id: ""
+      client_secret: ""
+
+# Monitoring Settings
+monitoring:
+  refresh_interval: 30  # seconds
+  metrics_retention_days: 30
+  log_level: "INFO"
+  log_format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  
+  # Prometheus metrics
+  prometheus:
+    enabled: true
+    port: 9090
+  
+  # Health check endpoints
+  health_check:
+    interval: 15
+    timeout: 5
+    retries: 3
+
+# Device Management Settings
+devices:
+  heartbeat_timeout: 60  # seconds
+  max_devices_per_cluster: 100
+  auto_register: true
+  registration_token: "device-registration-token"
+  
+  # Screen capture settings
+  capture:
+    max_resolution: "1920x1080"
+    fps: 1
+    quality: 80
+  
+  # ML processing settings
+  ml:
+    model_path: "./models"
+    inference_timeout: 10
+    batch_size: 1
+
+# Cluster Management Settings
+clusters:
+  max_clusters: 50
+  election_timeout: 5000  # milliseconds
+  heartbeat_interval: 1000  # milliseconds
+  join_timeout: 30000  # milliseconds
+  
+  # Ricart-Agrawala algorithm settings
+  mutual_exclusion:
+    request_timeout: 5000
+    retry_count: 3
+  
+  # Vector clock settings
+  vector_clocks:
+    max_entries: 10000
+    gc_interval: 3600  # seconds
+
+# Fault Tolerance Settings
+fault_tolerance:
+  # Byzantine agreement settings
+  byzantine:
+    enabled: true
+    quorum_size: 3
+    faulty_nodes_tolerance: 1
+    agreement_timeout: 10000  # milliseconds
+  
+  # Checkpoint settings
+  checkpoint:
+    interval: 300  # seconds
+    retention: 24  # hours
+    storage_path: "./checkpoints"
+  
+  # Recovery settings
+  recovery:
+    enabled: true
+    max_retry: 3
+    timeout: 30000  # milliseconds
+
+# Analytics Settings
+analytics:
+  # Data retention
+  raw_data_retention: 7  # days
+  aggregated_data_retention: 30  # days
+  
+  # Processing settings
+  batch_size: 1000
+  processing_interval: 60  # seconds
+  
+  # TensorFlow Lite settings
+  tflite:
+    num_threads: 4
+    use_gpu: false
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file_path: "./logs/dasas_admin.log"
+  max_size: 10485760  # 10MB
+  backup_count: 5
+  
+  # Console logging
+  console:
+    enabled: true
+    format: "%(levelname)s: %(message)s"
+
+# UI Settings
+ui:
+  theme: "dark"
+  sidebar_collapsed: false
+  custom_css: null
+  
+  # Dashboard settings
+  dashboard:
+    widgets_per_row: 4
+    chart_height: 300
+    table_page_size: 20
+
+# External Services
+external_services:
+  # Firebase configuration
+  firebase:
+    enabled: false
+    project_id: ""
+    credentials_path: ""
+  
+  # Google Cloud configuration
+  gcp:
+    enabled: false
+    project_id: ""
+    region: "us-central1"
+  
+  # TensorFlow Serving
+  tf_serving:
+    enabled: false
+    host: "localhost"
+    port: 8501
+
+# Security Settings
+security:
+  # SSL/TLS settings
+  ssl:
+    enabled: false
+    cert_path: ""
+    key_path: ""
+  
+  # Rate limiting
+  rate_limit:
+    enabled: true
+    requests_per_minute: 100
+    burst_size: 10
+  
+  # CORS settings
+  cors:
+    enabled: true
+    origins:
+      - "*"
+    methods:
+      - "*"
+    headers:
+      - "*"

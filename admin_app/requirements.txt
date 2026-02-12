@@ -1,0 +1,88 @@
+# DASAS Admin Dashboard Requirements
+# ==================================
+# Production dependencies for the DASAS Admin Dashboard
+# Python 3.13.9 Compatible | Optimized for 16GB RAM i7
+
+# Core Framework
+streamlit>=1.40.0
+fastapi>=0.115.0
+uvicorn>=0.32.0
+pydantic>=2.10.0
+
+# Database
+sqlalchemy>=2.0.28
+
+# Configuration
+pyyaml>=6.0.2
+
+# Authentication
+python-jose[cryptography]>=3.3.0
+passlib[bcrypt]>=1.7.4
+
+# MQTT (Device Communication)
+paho-mqtt>=2.1.0
+
+# gRPC (Android Device API)
+grpcio>=1.68.0
+grpcio-tools>=1.68.0
+
+# Redis (Caching)
+redis>=5.2.0
+
+# Prometheus Metrics
+prometheus-client>=0.21.0
+
+# Data Processing
+pandas>=2.2.3
+numpy>=2.2.0
+
+# Visualization
+plotly>=6.0.0
+
+# HTTP Client
+httpx>=0.28.0
+
+# Security
+python-multipart>=0.0.20
+
+# Utilities
+python-dateutil>=2.9.0
+dataclasses-json>=0.6.7
+
+# Development & Testing
+pytest>=8.3.0
+pytest-cov>=6.0.0
+pytest-asyncio>=1.0.0
+black>=24.10.0
+isort>=5.13.0
+flake8>=7.2.0
+mypy>=1.13.0
+
+# Type Hints (compatible versions)
+types-redis>=4.6.0.20241004
+types-PyYAML>=6.0.0.20240917
+
+# Documentation
+sphinx>=8.1.0
+sphinx-rtd-theme>=3.0.0
+
+# Docker Support
+docker>=7.1.0
+
+# Optional: PostgreSQL Support
+psycopg>=3.2.3
+
+# Optional: Cloud Services
+firebase-admin>=6.5.0
+google-cloud-storage>=2.18.0
+
+# Performance (Optimized for 16GB RAM)
+orjson>=3.10.12
+ujson>=5.10.0
+
+# Logging
+colorlog>=6.9.0
+rich>=13.9.4
+
+# WebSocket Support
+websockets>=14.1
