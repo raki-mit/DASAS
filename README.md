@@ -52,7 +52,7 @@ The **DASAS Admin Dashboard** is a Streamlit-based web application designed to m
 │         └──────────────────────────────────────┘                   │
 └─────────────────────────────────────────────────────────────────┘
 ```
-![High Level Diagram](https://github.com/raki-mit/DASAS/blob/main/high%20level%20diragram.jpg?raw=true)
+![High Level Diagram](https://raw.githubusercontent.com/raki-mit/DASAS/refs/heads/main/high%20level%20diragram.jpg?raw=True)
 
 *High-level architecture diagram for DASAS.*
 
