@@ -11,6 +11,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 from typing import Any, Dict, List, Optional
+import random
 
 # Handle relative imports for both direct and package usage
 try:
@@ -180,7 +181,6 @@ class DashboardComponents:
         st.subheader("💚 System Health")
         
         # Generate sample health data
-        import random
         health_data = []
         for i in range(24):
             health_data.append({

@@ -192,8 +192,8 @@ class ClusterManager:
         
         return [
             c for c in clusters
-            if query_lower in c.get("name", "").lower()
-            or query_lower in c.get("id", "").lower()
+            if query_lower in (c.get("name") or "").lower()
+            or query_lower in (c.get("id") or "").lower()
         ]
     
     # ==================== Member Management ====================

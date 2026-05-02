@@ -143,15 +143,19 @@ class DevicePage:
                 if not name:
                     st.error("Device name is required")
                 else:
+                    device_info = {
+                        "device_type": device_type,
+                        "ip_address": ip_address,
+                        "mac_address": mac_address,
+                        "android_version": android_version
+                    }
+                    # Only include device_id if it was provided
+                    if device_id:
+                        device_info["device_id"] = device_id
+                    
                     result = device_manager.register_device(
                         name=name,
-                        device_info={
-                            "device_id": device_id or None,
-                            "device_type": device_type,
-                            "ip_address": ip_address,
-                            "mac_address": mac_address,
-                            "android_version": android_version
-                        }
+                        device_info=device_info
                     )
                     
                     if result.get("success"):
@@ -170,8 +174,8 @@ class DevicePage:
             if search:
                 devices = [
                     d for d in devices
-                    if search.lower() in d.get("name", "").lower()
-                    or search.lower() in d.get("id", "").lower()
+                    if search.lower() in (d.get("name") or "").lower()
+                    or search.lower() in (d.get("id") or "").lower()
                 ]
             
             # Device list

@@ -66,6 +66,14 @@ class DASASAdminApp:
         self.logger = logger
         self.metrics = MetricsCollector()
         self.db_manager = DatabaseManager()
+        self.db_manager.initialize()  # Initialize database tables
+
+        # Also initialize the global db_manager used by API modules
+        try:
+            from .db.database import db_manager
+            db_manager.initialize()
+        except Exception:
+            pass
         self.device_manager = DeviceManager()
         self.cluster_manager = ClusterManager()
         self.analytics_manager = AnalyticsManager()
@@ -83,7 +91,7 @@ class DASASAdminApp:
         if "selected_cluster" not in st.session_state:
             st.session_state.selected_cluster = None
         if "refresh_interval" not in st.session_state:
-            st.session_state.refresh_interval = 30
+            st.session_state.refresh_interval = 0
         if "dark_mode" not in st.session_state:
             st.session_state.dark_mode = True
     
@@ -341,9 +349,10 @@ class DASASAdminApp:
             handler = page_handlers.get(st.session_state.page, self.render_dashboard)
             handler()
             
-            # Auto-refresh
-            if st.session_state.refresh_interval > 0:
-                st.rerun()
+            # Auto-refresh (only works with external scheduler or manual trigger)
+            # Note: time.sleep blocks Streamlit, so auto-refresh is disabled by default
+            # Users can manually refresh using the browser or set up external automation
+            pass
                 
         except Exception as e:
             self.logger.critical(f"Application error: {e}")

@@ -68,8 +68,6 @@ class DeviceManager:
         
         # Prepare device data
         device_data = {
-            "device_id": device_id,
-            "name": name,
             "device_type": device_info.get("device_type", "android"),
             "ip_address": device_info.get("ip_address"),
             "mac_address": device_info.get("mac_address"),
@@ -223,8 +221,8 @@ class DeviceManager:
         
         return [
             d for d in devices
-            if query_lower in d.get("name", "").lower()
-            or query_lower in d.get("id", "").lower()
+            if query_lower in (d.get("name") or "").lower()
+            or query_lower in (d.get("id") or "").lower()
         ]
     
     # ==================== Heartbeat Management ====================

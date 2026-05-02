@@ -1,0 +1,81 @@
+1. McMahan et al. – Communication-Efficient Learning of Deep Networks from Decentralized Data (Federated Learning)
+What the paper tells:
+Introduces Federated Learning and the FederatedAveraging (FedAvg) algorithm.
+
+Enables training a shared global model across many clients (mobile devices) without uploading raw data to a central server.
+
+Handles non-IID, unbalanced, and massively distributed data.
+
+Shows that local computation (multiple SGD steps per client) drastically reduces communication rounds.
+
+Demonstrates practical applications: language models, image classification, next-word prediction.
+
+How it is used in DASAS:
+Privacy preservation: DASAS processes screen content locally using TensorFlow Lite. Federated Learning allows the system to improve its ML models (e.g., OCR, screen classifiers) by sharing only model updates, not raw screen data.
+
+Decentralized learning: Instead of sending screenshots or extracted text to a cloud server, each Android device computes local gradients/updates. The cloud or edge aggregator combines these updates.
+
+Communication efficiency: DASAS operates over Wi-Fi Direct and Bluetooth — low-bandwidth channels. FedAvg's reduction in communication rounds is critical here.
+
+Handling real-world data: Users have different screen content (non-IID) and varying usage patterns (unbalanced). The paper’s robustness to these conditions justifies DASAS’s design.
+
+Used in:
+Step 2 (Local Processing & Inference) – local model training.
+Step 5 (Global Aggregation) – federated updates sent to cloud.
+
+✅ Direct mapping: Your "Privacy‑First Local‑Only Processing" and "Federated Learning" claims are directly supported by this paper.
+
+2. Ricart & Agrawala – An Optimal Algorithm for Mutual Exclusion in Computer Networks
+What the paper tells:
+A distributed mutual exclusion algorithm for networks without shared memory.
+
+Each node sends REQUEST messages to all others; replies are sent immediately if the requester has priority (based on sequence number + node ID), otherwise deferred.
+
+Requires 2×(N−1) messages per critical section entry.
+
+Claims optimality for symmetric, fully distributed algorithms under certain assumptions.
+
+Provides proof of mutual exclusion, deadlock freedom, and starvation freedom.
+
+How it is used in DASAS:
+Shared resource access: In a P2P mesh of Android devices, multiple nodes may want to access a shared ML service (e.g., a model update queue, a coordinator task, or a shared inference job). The Ricart-Agrawala algorithm ensures only one node enters the critical section at a time.
+
+No central coordinator: Your edge layer has no single leader by default. This algorithm allows distributed decisions without a leader.
+
+Priority handling: Sequence numbers + node IDs prevent starvation — important when many devices compete for analytics tasks.
+
+Used in:
+Step 4 (Consensus & Fault Tolerance) – deciding which device can access shared resources.
+Distributed Resource Coordination in your high-level diagram.
+
+✅ Direct mapping: Your objective #1 explicitly names Ricart-Agrawala for mutual exclusion.
+
+3. Suzuki & Kasami – A Distributed Mutual Exclusion Algorithm (Token-Based)
+What the paper tells:
+A token-based mutual exclusion algorithm for distributed systems.
+
+A single PRIVILEGE (token) message circulates; only the node holding the token can enter the critical section.
+
+Requires at most N messages per invocation (fewer than Ricart-Agrawala in many cases).
+
+Uses request arrays (RN) and last-granted arrays (LN) to track pending requests.
+
+Includes a bounded sequence number variant.
+
+Claims better performance than Ricart-Agrawala when requests are frequent.
+
+How it is used in DASAS:
+Token-based resource allocation: Once a device in the DASAS mesh obtains the token, it can repeatedly perform screen analytics tasks without re-requesting permission — more efficient than Ricart-Agrawala for high-frequency operations.
+
+Lower message overhead: In a dense P2P cluster (e.g., many devices in a room), token circulation reduces network chatter, preserving battery and bandwidth.
+
+Complement to Ricart-Agrawala: Your project can switch between algorithms depending on contention levels (Ricart-Agrawala for low contention, Suzuki-Kasami for high contention or token-friendly topologies).
+
+Used in:
+Optimization phase (weeks 10–12) – Suzuki-Kasami token allocation.
+Edge Coordination Layer – efficient mutual exclusion in stable clusters.
+
+✅ Direct mapping: Your objectives and timeline explicitly mention Suzuki-Kasami for token-based allocation.
+
+
+DASAS implements distributed mutual exclusion using Ricart-Agrawala [2] for low-contention scenarios and Suzuki-Kasami [4] for token-efficient high-frequency access. Federated learning [5] allows screen analytics to improve without compromising user privacy, while Byzantine agreement [3] ensures correctness despite node failures. These algorithms are adapted to Android’s resource-constrained environment and operate over a Wi-Fi Direct P2P mesh.

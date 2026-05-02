@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DASAS Analytics</string>
+
+    <!-- Main Activity -->
+    <string name="settings">Settings</string>
+    <string name="service_status">Service Status</string>
+    <string name="status_running">Running</string>
+    <string name="status_stopped">Stopped</string>
+    <string name="start_service">Start Service</string>
+    <string name="stop_service">Stop Service</string>
+    <string name="connection">Connection</string>
+    <string name="test_connection">Test Connection</string>
+    <string name="register_device">Register Device</string>
+    <string name="device_metrics">Device Metrics</string>
+    <string name="device_info">Device Info</string>
+    <string name="refresh">Refresh</string>
+
+    <!-- Metrics Labels -->
+    <string name="cpu">CPU</string>
+    <string name="memory">Memory</string>
+    <string name="battery">Battery</string>
+    <string name="storage">Storage</string>
+    <string name="ip_address">IP Address</string>
+    <string name="mac_address">MAC Address</string>
+    <string name="android_version">Android</string>
+    <string name="model">Model</string>
+
+    <!-- Metrics Values -->
+    <string name="cpu_usage">CPU: %1$d%%</string>
+    <string name="memory_usage">Memory: %1$d%%</string>
+    <string name="battery_level">Battery: %1$d%%</string>
+    <string name="disk_usage">Storage: %1$d%%</string>
+
+    <!-- Connection Status -->
+    <string name="testing_connection">Testing connection...</string>
+    <string name="connection_success">Connected successfully!</string>
+    <string name="connection_failed">Connection failed</string>
+    <string name="registering">Registering device...</string>
+    <string name="registered_success">Device registered successfully!</string>
+    <string name="register_failed">Registration failed: %1$s</string>
+
+    <!-- Last Heartbeat -->
+    <string name="last_heartbeat">Last heartbeat: %1$s</string>
+
+    <!-- Settings Activity -->
+    <string name="server_url">Server URL</string>
+    <string name="server_url_hint">e.g., http://192.168.1.100:8501</string>
+    <string name="device_name">Device Name</string>
+    <string name="device_id">Device ID</string>
+    <string name="device_id_hint">Unique identifier (auto-generated)</string>
+    <string name="heartbeat_interval">Heartbeat Interval (seconds)</string>
+    <string name="heartbeat_interval_hint">Minimum: 10 seconds</string>
+    <string name="save">Save</string>
+    <string name="reset">Reset</string>
+
+    <!-- Notification -->
+    <string name="notification_title">DASAS Analytics</string>
+    <string name="notification_text">Sending device analytics to dashboard</string>
+</resources>
